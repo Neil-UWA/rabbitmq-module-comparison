@@ -1,0 +1,23 @@
+{
+  "name": "rabbitmq-module-comparison",
+  "version": "1.0.0",
+  "description": "compare rabbit.js and node-amqp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Neil-UWA/rabbitmq-module-comparison.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Neil-UWA/rabbitmq-module-comparison/issues"
+  },
+  "homepage": "https://github.com/Neil-UWA/rabbitmq-module-comparison",
+  "dependencies": {
+    "amqp": "^0.2.0",
+    "rabbit.js": "^0.4.1"
+  }
+}
