@@ -18,6 +18,8 @@
   "homepage": "https://github.com/Neil-UWA/rabbitmq-module-comparison",
   "dependencies": {
     "amqp": "^0.2.0",
+    "async": "^0.9.0",
+    "coffee-script": "^1.8.0",
     "rabbit.js": "^0.4.1"
   }
 }
