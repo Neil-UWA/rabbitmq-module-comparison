@@ -18,7 +18,7 @@ class RabbitQueue
     @pull = @ctx.socket 'PULL'
     @push = @ctx.socket 'PUSH'
 
-    # when using pull/worker, after a worker done processing,
+    # when using push/worker, after a worker done processing,
     # worker must call #ack
     @worker = @ctx.socket 'WORKER'
 
