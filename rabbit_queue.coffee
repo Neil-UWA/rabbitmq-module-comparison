@@ -1,6 +1,7 @@
 rabbit = require 'rabbit.js'
 
 class RabbitQueue
+
   constructor: ->
     @ctx = rabbit.createContext()
 
@@ -36,8 +37,8 @@ class RabbitQueue
     @worker.connect provider
 
     @worker.on 'data', (data)=>
-      callback data
       @worker.ack()
+      callback data
 
 module.exports = RabbitQueue
 
