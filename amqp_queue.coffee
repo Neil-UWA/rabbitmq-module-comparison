@@ -9,17 +9,16 @@ class AMQPQueue
 
   onProcess: (provider, callback)->
     @connection.on 'ready', =>
-      @connection.queue provider, {autoDelete: false}, (queue)->
+      @connection.queue provider, {autoDelete: false, durable: true}, (queue)->
         console.log 'Queue name: ' + queue.name
-        queue.subscribe (message, headers, deliveryInfo, messageObject)->
-        console.log message
-        console.log headers
-        console.log deliveryInfo
-        callback()
+        queue.subscribe((message, headers, deliveryInfo, messageObject)->
+          console.log message.data.toString()
+          callback()
+        )
 
   queueJob: (provider, job, callback)->
     @connection.on 'ready', =>
-      @connection.publish provider, job, ->
+      @connection.publish provider,  job, ->
         callback()
 
 module.exports = AMQPQueue
