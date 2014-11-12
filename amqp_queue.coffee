@@ -18,7 +18,7 @@ class AMQPQueue
 
   queueJob: (provider, job, callback)->
     @connection.on 'ready', =>
-      @connection.publish provider,  job, ->
+      @connection.publish provider,  job, {autoDelete: false, durable: true},->
         callback()
 
 module.exports = AMQPQueue

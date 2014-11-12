@@ -3,7 +3,7 @@ rabbit = require 'rabbit.js'
 class RabbitQueue
 
   constructor: ->
-    @ctx = rabbit.createContext()
+    @ctx = rabbit.createContext('amqp://localhost')
 
     @ctx.on 'error', (err)-> console.error err
 
@@ -17,11 +17,11 @@ class RabbitQueue
 
     # pull/push use round-robin strategy
     @pull = @ctx.socket 'PULL'
-    @push = @ctx.socket 'PUSH'
+    @push = @ctx.socket 'PUSH', persistent: true
 
     # when using push/worker, after a worker done processing,
     # worker must call #ack
-    @worker = @ctx.socket 'WORKER'
+    @worker = @ctx.socket 'WORKER', persistent: true
 
     @req = @ctx.socket 'REQ'
     @rep = @ctx.socket 'REP'
@@ -30,15 +30,13 @@ class RabbitQueue
     return callback Error 'Provider not specificed' unless provider? and provider isnt ''
 
     @push.connect provider, (callback)=>
-      @push.write job
+      @push.write job, 'utf8'
 
   onProcess: (provider, callback)->
-    @worker.setEncoding 'utf8'
     @worker.connect provider
-
     @worker.on 'data', (data)=>
+      console.log data
       @worker.ack()
-      callback data
 
 module.exports = RabbitQueue
 
